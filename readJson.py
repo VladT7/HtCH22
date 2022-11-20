@@ -22,8 +22,20 @@ product_json = json.loads(response.read())
 
 productName = ' '.join(
     product_json['product']['product_name'].split(' '))
+
 print(productName)
 
+# pictures of product scanned
+ProductsImages_display = product_json['product']['selected_images']['front']['display']['en']
+ProductsImages_thumb = product_json['product']['selected_images']['front']['thumb']['en']
+ProductsImages_small = product_json['product']['selected_images']['front']['small']['en']
+
+print('Display picture of {product}: {display}'.format(
+    product=productName, display=ProductsImages_display))
+print('Thumb picture of {product}: {thumb}'.format(
+    product=productName, thumb=ProductsImages_thumb))
+print('Small picture of {product}: {small}'.format(
+    product=productName, small=ProductsImages_small))
 # STEP THREE: cross references
 critLevels = []
 for i in criteria:
@@ -59,10 +71,28 @@ else:
             op.append('lte')
         elif critLevels[i] == 'high' or critLevels[i] == 'moderate':
             op.append('lt')
+        print(criteria[i], op[i], criterionValues[i])
 
-
-newUrl = "https://world.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0={category}&nutriment_100g_0={criterionZero}&nutriment_100g_compare_0={opZero}&nutriment_100g_value_0={val_c0}&nutriment_1={criterionOne}&nutriment_compare_1={opOne}&nutriment_value_1={val_c1}&nutriment_2={criterionTwo}&nutriment_compare_2={opTwo}&nutriment_value_2={val_c2}&json=true".format(
+newUrl = "https://world.openfoodfacts.org/cgi/search.pl?action=process&tagtype_0=categories&tag_contains_0=contains&tag_0={category}&nutriment_100g_0={criterionZero}&nutriment_100g_compare_0={opZero}&nutriment_100g_value_0={val_c0}&nutriment_1={criterionOne}&nutriment_compare_1={opOne}&nutriment_value_1={val_c1}&nutriment_2={criterionTwo}&nutriment_compare_2={opTwo}&nutriment_value_2={val_c2}&sort_by=nutriscore_score&json=true".format(
     category=specificCat, criterionZero=crZero, opZero=op[0], opOne=op[1], opTwo=op[2], val_c0=criterionValues[0], criterionOne=crOne, val_c1=criterionValues[1], criterionTwo=crTwo, val_c2=criterionValues[2])
+
+# print(newUrl)
 
 similarCatUrl = urlopen(newUrl)
 similarCatJson = json.loads(similarCatUrl.read())
+
+suggestProducts = similarCatJson['products'][0]['product_name']
+suggestProductsImages_display = similarCatJson['products'][0]['selected_images']['front']['display']['en']
+suggestProductsImages_thumb = similarCatJson['products'][0]['selected_images']['front']['thumb']['en']
+suggestProductsImages_small = similarCatJson['products'][0]['selected_images']['front']['small']['en']
+
+
+print("You should try", suggestProducts)
+print("Here is the biggest picture of it:",
+      suggestProductsImages_display)
+
+print("Here is the thumbnail picture of it:",
+      suggestProductsImages_thumb)
+
+print("Here is the smallest picture of it:",
+      suggestProductsImages_small)
