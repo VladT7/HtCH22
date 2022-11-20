@@ -154,11 +154,8 @@ def main():
 def finalOutputAsJSON(input):
     jsonObject = json.dumps(input)
     print(jsonObject)
-    with open("./json/results.json", "w") as outfile:
+    with open("./fiberr2/src/results.json", "w") as outfile:
         outfile.write(jsonObject)
-
-
-
 
 # initialization of main
 if __name__ == '__main__':
