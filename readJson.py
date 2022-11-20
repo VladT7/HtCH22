@@ -16,4 +16,4 @@ response = urlopen(url)
 data_json = json.loads(response.read())
 
 # print the name of product
-print(data_json['product']['_keywords'])
+print(' '.join(data_json['product']['_keywords']))
