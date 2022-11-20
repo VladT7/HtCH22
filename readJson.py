@@ -17,7 +17,6 @@ url = "https://world.openfoodfacts.org/api/v0/product/{upcToPass}.json".format(
 response = urlopen(url)
 # storing the JSON response from url
 product_json = json.loads(response.read())
-
 # find name of product
 
 productName = ' '.join(
@@ -26,9 +25,15 @@ productName = ' '.join(
 print(productName)
 
 # pictures of product scanned
-ProductsImages_display = product_json['product']['selected_images']['front']['display']['en']
-ProductsImages_thumb = product_json['product']['selected_images']['front']['thumb']['en']
-ProductsImages_small = product_json['product']['selected_images']['front']['small']['en']
+try:
+    ProductsImages_display = product_json['product']['selected_images']['front']['display']['fr']
+    ProductsImages_thumb = product_json['product']['selected_images']['front']['thumb']['fr']
+    ProductsImages_small = product_json['product']['selected_images']['front']['small']['fr']
+except:
+    ProductsImages_display = product_json['product']['selected_images']['front']['display']['en']
+    ProductsImages_thumb = product_json['product']['selected_images']['front']['thumb']['en']
+    ProductsImages_small = product_json['product']['selected_images']['front']['small']['en']
+
 
 print('Display picture of {product}: {display}'.format(
     product=productName, display=ProductsImages_display))
@@ -82,9 +87,16 @@ similarCatUrl = urlopen(newUrl)
 similarCatJson = json.loads(similarCatUrl.read())
 
 suggestProducts = similarCatJson['products'][0]['product_name']
-suggestProductsImages_display = similarCatJson['products'][0]['selected_images']['front']['display']['en']
-suggestProductsImages_thumb = similarCatJson['products'][0]['selected_images']['front']['thumb']['en']
-suggestProductsImages_small = similarCatJson['products'][0]['selected_images']['front']['small']['en']
+try:
+    suggestProductsImages_display = similarCatJson['products'][
+        0]['selected_images']['front']['display']['fr']
+    suggestProductsImages_thumb = similarCatJson['products'][0]['selected_images']['front']['thumb']['fr']
+    suggestProductsImages_small = similarCatJson['products'][0]['selected_images']['front']['small']['fr']
+except:
+    suggestProductsImages_display = similarCatJson['products'][
+        0]['selected_images']['front']['display']['en']
+    suggestProductsImages_thumb = similarCatJson['products'][0]['selected_images']['front']['thumb']['en']
+    suggestProductsImages_small = similarCatJson['products'][0]['selected_images']['front']['small']['en']
 
 
 print("You should try", suggestProducts)
