@@ -1,0 +1,7 @@
+.d-md-flex{
+    background-color: #469ea6;
+    width: 100;
+    margin: auto;
+    flex: 1;
+    flex-direction: row;
+}
