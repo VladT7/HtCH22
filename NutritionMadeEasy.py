@@ -129,7 +129,10 @@ def nutrition_value(barcode_info):
 
     print("Here is the smallest picture of it:",
           suggest_products_images_small)
+    Output_Dict = {"CriteriaZero": criteria[0], "CriteriaOne": criteria[1], "CriteriaTwo": criteria[2], "CriteriaZeroLevel": crit_levels[0], "CriteriaOneLevel": crit_levels[1], "CriteriaTwoLevel": crit_levels[2], "CriteriaZeroValue": criterion_values[0], "CriteriaOneValue": criterion_values[1],
+                "CriteriaTwoValue": criterion_values[2], "ProductName": product_name, "ProductImage": products_images_display, "ProductImageSM": products_images_thumb, "SuggestedProduct": suggest_products, "SuggestedProductImg": suggest_products_images_display, "SuggestedProductImgSM": suggest_products_images_thumb}
 
+    finalOutputAsJSON(Output_Dict)  
     return barcode_info
 
 
@@ -148,7 +151,16 @@ def main():
     camera.release()
     cv2.destroyAllWindows()
 
+def finalOutputAsJSON(input):
+    jsonObject = json.dumps(input)
+    print(jsonObject)
+    with open("./json/results.json", "w") as outfile:
+        outfile.write(jsonObject)
+
+
+
 
 # initialization of main
 if __name__ == '__main__':
     main()
+    
