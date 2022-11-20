@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../../results.json";
+import data from "./results.json";
 function Info() {
   return (
     <div>
