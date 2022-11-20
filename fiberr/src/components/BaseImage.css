@@ -1,0 +1,15 @@
+.base-image {
+  text-align: center;
+  color: #f8f9fa;
+  background-color: #868e96;
+  border-radius: 4px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: .063rem;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px;
+  display: flex;
+}

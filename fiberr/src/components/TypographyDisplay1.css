@@ -1,0 +1,17 @@
+.typography-display-1 {
+  text-align: center;
+  color: #343a40;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: .188rem;
+  font-family: Segoe UI;
+  font-size: 5.5rem;
+  font-weight: 400;
+  line-height: 106px;
+  display: flex;
+}
+
+.display-2 {
+  margin-top: .125rem;
+}

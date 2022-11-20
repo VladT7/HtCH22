@@ -1,0 +1,14 @@
+.button-1 {
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  display: flex;
+}
+
+.button-instance-1 {
+  height: 100%;
+  flex-basis: 72%;
+}
