@@ -5,6 +5,8 @@ import cv2
 from pyzbar import pyzbar
 
 # STEP ONE: Get user criterion
+# Prepping User
+print("What health restrictions do you have? low: Salt, Sugars and Fat")
 # ask user for criteria
 crZero = input("Type one category: ")
 crOne = input("Type another category: ")
@@ -106,8 +108,9 @@ def nutrition_value(barcode_info):
               "opZero}&nutriment_100g_value_0={val_c0}&nutriment_1={criterionOne}&nutriment_compare_1={" \
               "opOne}&nutriment_value_1={val_c1}&nutriment_2={criterionTwo}&nutriment_compare_2={" \
               "opTwo}&nutriment_value_2={val_c2}&sort_by=nutriscore_score&json=true".format(
-        category=specific_cat, criterionZero=crZero, opZero=op[0], opOne=op[1], opTwo=op[2], val_c0=criterion_values[0],
-        criterionOne=crOne, val_c1=criterion_values[1], criterionTwo=crTwo, val_c2=criterion_values[2])
+                category=specific_cat, criterionZero=crZero, opZero=op[0], opOne=op[1], opTwo=op[2],
+                val_c0=criterion_values[0], criterionOne=crOne, val_c1=criterion_values[1], criterionTwo=crTwo,
+                val_c2=criterion_values[2])
 
     # print(new_url)
 
@@ -129,10 +132,16 @@ def nutrition_value(barcode_info):
 
     print("Here is the smallest picture of it:",
           suggest_products_images_small)
-    Output_Dict = {"CriteriaZero": criteria[0], "CriteriaOne": criteria[1], "CriteriaTwo": criteria[2], "CriteriaZeroLevel": crit_levels[0], "CriteriaOneLevel": crit_levels[1], "CriteriaTwoLevel": crit_levels[2], "CriteriaZeroValue": criterion_values[0], "CriteriaOneValue": criterion_values[1],
-                "CriteriaTwoValue": criterion_values[2], "ProductName": product_name, "ProductImage": products_images_display, "ProductImageSM": products_images_thumb, "SuggestedProduct": suggest_products, "SuggestedProductImg": suggest_products_images_display, "SuggestedProductImgSM": suggest_products_images_thumb}
+    Output_Dict = {"CriteriaZero": criteria[0], "CriteriaOne": criteria[1], "CriteriaTwo": criteria[2],
+                   "CriteriaZeroLevel": crit_levels[0], "CriteriaOneLevel": crit_levels[1],
+                   "CriteriaTwoLevel": crit_levels[2], "CriteriaZeroValue": criterion_values[0],
+                   "CriteriaOneValue": criterion_values[1],
+                   "CriteriaTwoValue": criterion_values[2], "ProductName": product_name,
+                   "ProductImage": products_images_display, "ProductImageSM": products_images_thumb,
+                   "SuggestedProduct": suggest_products, "SuggestedProductImg": suggest_products_images_display,
+                   "SuggestedProductImgSM": suggest_products_images_thumb}
 
-    finalOutputAsJSON(Output_Dict)  
+    final_output_as_joson(Output_Dict)
     return barcode_info
 
 
@@ -142,6 +151,7 @@ def main():
     ret, frame = camera.read()
     # 2
     while ret:
+        print("Scan the products barcode to generate nutrition information and alternative recommendations!")
         ret, frame = camera.read()
         frame = read_barcodes(frame)
         cv2.imshow('Barcode/QR code reader', frame)
@@ -151,13 +161,14 @@ def main():
     camera.release()
     cv2.destroyAllWindows()
 
-def finalOutputAsJSON(input):
-    jsonObject = json.dumps(input)
+
+def final_output_as_joson(input_value):
+    jsonObject = json.dumps(input_value)
     print(jsonObject)
-    with open("./fiberr2/src/results.json", "w") as outfile:
+    with open("./json/results.json", "w") as outfile:
         outfile.write(jsonObject)
+
 
 # initialization of main
 if __name__ == '__main__':
     main()
-    
