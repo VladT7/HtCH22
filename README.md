@@ -1,6 +1,9 @@
 # Fiberr
+<img src="1.png" width = "100">
+<img src="2.png" width = "100">
+<img src="3.png" width = "100">
 
-![](1.png) ![](2.png) ![](3.png)
+<!-- ![](1.png) ![](2.png) ![](3.png) -->
 
 ## Inspiration
 This app was inspired by how confusing it is to make healthy, sustainable choices when it comes to purchasing groceries and snacks. We aim to promote a sustainable lifestyle and educate our users on the available alternatives to their favorite (yet unhealthy) foods . 
